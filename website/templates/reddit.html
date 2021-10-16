@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Reddit{% endblock %}
+
+{% block content %}
+
+<h1 class="fw-bold" align = "Center" >Enter a Subreddit</h1>
+
+<br/>
+
+<form method = "POST">
+    <textarea name = "text" id = "text" class = "form-control"></textarea>
+
+    <br/>
+
+    <div align = "center">
+        <button type = "submit" class = "btn btn-lg btn-primary">Find Posts</button>
+    </div>
+</form>
+
+{% endblock %}
