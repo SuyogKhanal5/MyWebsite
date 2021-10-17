@@ -1,5 +1,6 @@
 from flask import render_template, Blueprint, redirect, flash, request
 import praw
+import random
 
 views = Blueprint("views", __name__)
 
@@ -56,18 +57,20 @@ def subreddit():
 def thiswebsite():
     return redirect("https://github.com/SuyogKhanal5/MyWebsite")
 
-@views.route("reddit")
+@views.route("reddit", methods = ["GET","POST"])
 def reddit():
     if request.method == "POST":
         text = request.form.get("text")
         if not text:
                 flash("Subreddit cannot be empty", category = "error")
                 return render_template("reddit.html")
+        else:
+            return render_template("returnposts.html")
     else:
         return render_template("reddit.html")
 
 @views.route("returnpost", methods = ["GET","POST"])
-def returnpost():
+def returnpost(text):
             subreddit = reddit.subreddit(text)
 
             all_submissions = []
@@ -79,14 +82,12 @@ def returnpost():
 
             random_submission = random.choice(all_submissions)
                     
-            class Post:
-                name = random_submission.title
-                submission_url = random_submission.url
-                submission_desc = random_submission.selftext
-                link = 'https://www.reddit.com' + random_submission.permalink
-            
-            post = Post(name, submission_url, submission_desc, link)
+
+            name = random_submission.title
+            submission_url = random_submission.url
+            submission_desc = random_submission.selftext
+            link = 'https://www.reddit.com' + random_submission.permalink
 
             flash("Success", category = "success")
 
-            return render_template("returnposts.html", post)
+            return render_template("returnposts.html")
