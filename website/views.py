@@ -11,6 +11,8 @@ reddit = praw.Reddit(
                     password = 'scrapingredditalt', 
                     user_agent = 'DiscordScraper')
 
+post_text = ""
+
 @views.route("/")
 @views.route("/home")
 def home():
@@ -65,12 +67,15 @@ def reddit():
                 flash("Subreddit cannot be empty", category = "error")
                 return render_template("reddit.html")
         else:
+            post_text = text
             return render_template("returnposts.html")
     else:
         return render_template("reddit.html")
 
 @views.route("returnpost", methods = ["GET","POST"])
-def returnpost(text):
+def returnpost():
+            text = post_text
+
             subreddit = reddit.subreddit(text)
 
             all_submissions = []
@@ -82,11 +87,14 @@ def returnpost(text):
 
             random_submission = random.choice(all_submissions)
                     
-
             name = random_submission.title
             submission_url = random_submission.url
             submission_desc = random_submission.selftext
             link = 'https://www.reddit.com' + random_submission.permalink
+
+            print(name, submission_url, submission_desc, link)
+
+            # https://stackoverflow.com/questions/8624520/passing-a-variable-into-a-jinja-import-or-include-from-a-parent-html-file
 
             flash("Success", category = "success")
 
