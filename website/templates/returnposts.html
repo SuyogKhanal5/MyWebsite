@@ -7,4 +7,22 @@
 
 <br/>
 
+{% for x in range(50) %}
+    <div id = "posts">
+        <div class="card">
+            <div class="card-header">
+                <i class="fab fa-reddit"></i> 
+                Author
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Title</h5>
+            <p class="card-text">Body</p>
+            <a href="#" class="btn btn-primary">Link</a>
+            </div>
+        </div>
+
+        <br/>
+    </div>
+{% endfor %}
+
 {% endblock %}

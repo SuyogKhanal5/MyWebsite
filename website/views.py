@@ -85,17 +85,15 @@ def returnpost():
             for submission in hot:
                 all_submissions.append(submission)
 
-            random_submission = random.choice(all_submissions)
-                    
-            name = random_submission.title
-            submission_url = random_submission.url
-            submission_desc = random_submission.selftext
-            link = 'https://www.reddit.com' + random_submission.permalink
+                random_submission = random.choice(all_submissions)
+                        
+                name = random_submission.title
+                author = random_submission.author
+                submission_desc = random_submission.selftext
+                link = 'https://www.reddit.com' + random_submission.permalink
 
-            print(name, submission_url, submission_desc, link)
+                # https://stackoverflow.com/questions/8624520/passing-a-variable-into-a-jinja-import-or-include-from-a-parent-html-file
 
-            # https://stackoverflow.com/questions/8624520/passing-a-variable-into-a-jinja-import-or-include-from-a-parent-html-file
+                flash("Success", category = "success")
 
-            flash("Success", category = "success")
-
-            return render_template("returnposts.html")
+                return render_template("returnposts.html", title = name, link = link, body = submission_desc, author = author)
