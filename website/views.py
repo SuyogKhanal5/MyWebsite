@@ -1,6 +1,8 @@
 from flask import render_template, Blueprint, redirect, flash, request
 import praw
 import random
+# from .models import Posts
+# from . import db
 
 views = Blueprint("views", __name__)
 
@@ -75,7 +77,7 @@ def reddit():
 @views.route("returnpost", methods = ["GET","POST"])
 def returnpost():
             text = post_text
-
+            
             subreddit = reddit.subreddit(text)
 
             all_submissions = []
@@ -86,14 +88,15 @@ def returnpost():
                 all_submissions.append(submission)
 
                 random_submission = random.choice(all_submissions)
-                        
+                
                 name = random_submission.title
                 author = random_submission.author
                 submission_desc = random_submission.selftext
                 link = 'https://www.reddit.com' + random_submission.permalink
 
-                # https://stackoverflow.com/questions/8624520/passing-a-variable-into-a-jinja-import-or-include-from-a-parent-html-file
+                # post = Posts.query_filterby(title = name, author = author, body = submission_desc, link = link)
 
-                flash("Success", category = "success")
+                # db.session.add(post)
+                # db.session.commit()
 
-                return render_template("returnposts.html", title = name, link = link, body = submission_desc, author = author)
+                return render_template("returnposts.html")
