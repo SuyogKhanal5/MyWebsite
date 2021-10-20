@@ -83,20 +83,25 @@ def returnpost():
             all_submissions = []
 
             hot = subreddit.hot(limit = 50)
+
+            names_list = []
+            author_list = []
+            submission_desc_list = []
+            link_list = []
             
             for submission in hot:
                 all_submissions.append(submission)
 
                 random_submission = random.choice(all_submissions)
                 
-                name = random_submission.title
-                author = random_submission.author
-                submission_desc = random_submission.selftext
-                link = 'https://www.reddit.com' + random_submission.permalink
+                names_list.append(random_submission.title)
+                author_list.append(random_submission.author)
+                submission_desc_list.append(random_submission.selftext)
+                link_list.append('https://www.reddit.com' + random_submission.permalink)
 
                 # post = Posts.query_filterby(title = name, author = author, body = submission_desc, link = link)
 
                 # db.session.add(post)
                 # db.session.commit()
 
-                return render_template("returnposts.html")
+                return render_template("returnposts.html", names_list, author_list, submission_desc_list, link_list)
