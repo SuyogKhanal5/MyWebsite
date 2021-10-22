@@ -76,32 +76,32 @@ def reddit():
 
 @views.route("returnpost", methods = ["GET","POST"])
 def returnpost():
-            text = post_text
+    text = post_text
             
-            subreddit = reddit.subreddit(text)
+    subreddit = reddit.subreddit(text)
 
-            all_submissions = []
+    all_submissions = []
 
-            hot = subreddit.hot(limit = 50)
+    hot = subreddit.hot(limit = 50)
 
-            names_list = []
-            author_list = []
-            submission_desc_list = []
-            link_list = []
+    names_list = []
+    author_list = []
+    submission_desc_list = []
+    link_list = []       
             
-            for submission in hot:
-                all_submissions.append(submission)
+    for submission in hot:
+        all_submissions.append(submission)
 
-                random_submission = random.choice(all_submissions)
+        random_submission = random.choice(all_submissions)
                 
-                names_list.append(random_submission.title)
-                author_list.append(random_submission.author)
-                submission_desc_list.append(random_submission.selftext)
-                link_list.append('https://www.reddit.com' + random_submission.permalink)
+        names_list.append(random_submission.title)
+        author_list.append(random_submission.author)
+        submission_desc_list.append(random_submission.selftext)
+        link_list.append('https://www.reddit.com' + random_submission.permalink)
 
-                # post = Posts.query_filterby(title = name, author = author, body = submission_desc, link = link)
+        # post = Posts.query_filterby(title = name, author = author, body = submission_desc, link = link)
 
-                # db.session.add(post)
-                # db.session.commit()
+        # db.session.add(post)
+        # db.session.commit()        
 
-                return render_template("returnposts.html", names_list, author_list, submission_desc_list, link_list)
+    return render_template("returnposts.html", names = names_list, author = author_list, submission_desc = submission_desc_list, link = link_list)
