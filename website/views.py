@@ -20,6 +20,22 @@ def twitter():
 def github():
     return redirect("https://github.com/SuyogKhanal5")
 
+@views.route("linkedin")
+def linkedin():
+    return redirect("https://www.linkedin.com/in/suyog-khanal/")
+
+@views.route("shockwave")
+def shockwave():
+    return redirect("https://shockwave.netlify.app/")
+
+@views.route("shockwavegithub")
+def shockwavegithub():
+    return redirect("https://github.com/SuyogKhanal5/Shockwave")
+
+@views.route("/experience")
+def experience():
+    return render_template("experience.html")
+
 @views.route("/projects")
 def projects():
     return render_template("projects.html")
