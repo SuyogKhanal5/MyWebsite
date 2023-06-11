@@ -14,7 +14,7 @@ def suyog():
 
 @views.route("twitter")
 def twitter():
-    return redirect("https://twitter.com/SuyogKhanal555")
+    return redirect("https://twitter.com/SuyogKhanal626")
 
 @views.route("github")
 def github():
